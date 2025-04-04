@@ -1,4 +1,10 @@
-import net, db_common
+import net
+
+when (NimMajor, NimMinor) >= (2, 0):
+  import db_connector/db_common 
+else:
+  import db_common
+
 import auth, packet, mysql_const, reader, writer, rsa_encrypt
 
 type Initial_handshake_v10* = object

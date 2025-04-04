@@ -17,8 +17,12 @@ func rsa_publickey_encrypt*(password_orig, seed, pubkey_pem: string): string =
     input[i] = (password[i].uint8 xor seed[i mod seed.len].uint8).chr()
   result = newString(rsa_size)
 
-  var fr = cast[ptr cuchar](input[0].addr)
-  var to = cast[ptr cuchar](result[0].addr)
+  when (NimMajor, NimMinor) >= (2, 0):
+    var fr = cast[ptr uint8](input[0].addr)
+    var to = cast[ptr uint8](result[0].addr)
+  else:
+    var fr = cast[ptr cuchar](input[0].addr)
+    var to = cast[ptr cuchar](result[0].addr)
 
   discard RSA_public_encrypt(input.len.cint, fr, to, rsa, RSA_PKCS1_OAEP_PADDING )
   RSA_free(rsa)

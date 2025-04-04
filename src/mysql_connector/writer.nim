@@ -1,5 +1,9 @@
-import db_common
 import packet
+
+when (NimMajor, NimMinor) >= (2, 0):
+  import db_connector/db_common 
+else:
+  import db_common
 
 type
   Writer* = Packet

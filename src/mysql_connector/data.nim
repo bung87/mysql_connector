@@ -1,5 +1,8 @@
 import packet, mysql_const, reader
-import db_common
+when (NimMajor, NimMinor) >= (2, 0):
+  import db_connector/db_common 
+else:
+  import db_common
 
 type
   ColumnDefinition41* = object

@@ -1,4 +1,11 @@
-import net, db_common
+import net
+
+when (NimMajor, NimMinor) >= (2, 0):
+  import db_connector/db_common
+else:
+  import db_common
+
+
 when defined(logging_mysql_connector):
   import logging
 import mysql_const, connection, packet, data

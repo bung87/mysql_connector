@@ -24,11 +24,11 @@ func auth_caching_sha2_password*(password, nonce: string): Packet =
   let hashed_password = sha2.final()
 
   sha2 = initSHA[SHA256]()
-  sha2.update(hashed_password.toString())
+  sha2.update($hashed_password)
   let digest1 = sha2.final()
 
   sha2 = initSHA[SHA256]()
-  sha2.update(digest1.toString())
+  sha2.update($digest1)
   sha2.update(nonce)
   let digest2 = sha2.final()
 
